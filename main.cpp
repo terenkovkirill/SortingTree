@@ -1,14 +1,17 @@
 #include <TXLib.h>
 #include <stdio.h>
 
-void Insert(Node_t* root, int node);
-
 struct Node_t 
 {
     int data;
     Node_t* left;
     Node_t* right;
 };
+
+void Insert(Node_t* root, int node);
+Node_t* NewNode(int data);
+void Print(Node_t* node);
+
 
 int main()
 {
@@ -27,8 +30,7 @@ int main()
 
 void Insert(Node_t* cur_node, int node)
 {
-    int cur_data = cur_node->data;
-    
+
     while ((cur_node->left != NULL) || (cur_node->right != NULL))
     {
         if (node < cur_node->data)
