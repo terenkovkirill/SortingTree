@@ -3,8 +3,8 @@
 #include "BinTree.h"
 
 
-void Insert(Node_t* cur_node, int node)
-{
+void Insert(Node_t* cur_node, int node)                             //простая версия, сохраняет результат (50(12(5)(15(17)))(70(60)))
+{                                                                   //почему-то ломается при Insert(root, 100)
     while ((cur_node->left != NULL) || (cur_node->right != NULL))
     {
         if (node < cur_node->data)
@@ -21,8 +21,8 @@ void Insert(Node_t* cur_node, int node)
         cur_node->right = NewNode(node);            //если node > cur_node->right
 }
 
-// void Insert(Node_t* cur_node, int value)                    //продвинутая, но нерабочая версия
-// {
+// void Insert(Node_t* cur_node, int value)                    //продвинутая версия, но нерабочая
+// {                                                           //почему-то не созраняет результат  (50(12(5)(15))(70(60)))
 //     while (cur_node != NULL)
 //     {
 //         // if (node < cur_node->data)
@@ -34,7 +34,7 @@ void Insert(Node_t* cur_node, int node)
 //         cur_node = (value < cur_node->data) ? cur_node->left : cur_node->right; 
 //     }
 
-//     cur_node->left = NewNode(value);
+//     cur_node = NewNode(value);
 // }
 
 Node_t* NewNode(int data)
@@ -61,4 +61,3 @@ void Print(Node_t* node)        //PREORDER
 
     printf(")");
 }
-

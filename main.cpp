@@ -19,10 +19,11 @@ int main()
     
     int node = 17;
     Insert(root, node);
+    //Insert(root, 100);                      //это не работает, почему?
+    // Insert(root, 101);
 
     Print(root);
     printf("\n BinTree works \n");
 }
-
 
 
