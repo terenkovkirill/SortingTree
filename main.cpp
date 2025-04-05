@@ -1,29 +1,31 @@
 #include <stdio.h>
 #include "BinTree.h"
 
+
 int main()
-{
-    Node_t* root = NewNode(50);
+{   
+    int tree_data[] = {12, 70, 1, 15, 60};
+    Node_t* root = InsertNode(0, 50);
 
-    root->left = NewNode(12);
-    root->right = NewNode(70);
+    DBG("InsertNode(0, 50)");
 
-    (root->left)->left = NewNode(5);
-    (root->left)->right = NewNode(15);
-    (root->right)->left = NewNode(60);
-    // Insert(root, 12);
-    // Insert(root, 70);
-    // Insert(root, 5);
-    // Insert(root, 15);
-    // Insert(root, 60);
+    int len_array = sizeof(tree_data) / sizeof(int);
+    for (int i = 0; i < len_array; i++)
+    {
+        InsertNode(root, tree_data[i]);
+        DBG("InsertNode(%p, %d) works", root, tree_data[i]);
+    }
     
-    int node = 17;
-    Insert(root, node);
-    //Insert(root, 100);                      //это не работает, почему?
-    // Insert(root, 101);
-
-    Print(root);
     printf("\n BinTree works \n");
+
+    return 0;
 }
 
 
+// TODO:
+// 1. Graf Dump
+// 2. InsertNode
+// 2.5 InsertNode (loop)
+// 3. FreeNode
+// 4. NodeFind
+// 5. TreeTraversal (Print)

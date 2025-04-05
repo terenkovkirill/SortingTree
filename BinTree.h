@@ -3,6 +3,15 @@
 
 #include <stdio.h>
 
+#define DEBUG
+
+#ifdef DEBUG
+    #define DBG(fmt, ...) \
+        fprintf(stderr, "[DEBUG] %s:%d %s() " fmt "\n", __FILE__, __LINE__, __func__, ##__VA_ARGS__)
+#else
+    #define DBG(fmt, ...)
+#endif
+//         fprintf(stderr, "[DEBUG] %s:%s.%d() " fmt "\n", __FILE__, __func__, __LINE__, ##__VA_ARGS__)
 
 struct Node_t 
 {
@@ -11,8 +20,8 @@ struct Node_t
     Node_t* right;
 };
 
-void Insert(Node_t* root, int node);
 Node_t* NewNode(int data);
+Node_t* InsertNode(Node_t* node, int value);
 void Print(Node_t* node);
 
 #endif
