@@ -2,8 +2,8 @@
 #define BINTREE_H
 
 #include <stdio.h>
-
-#define DEBUG
+#include <stdlib.h>
+// #define DEBUG
 
 #ifdef DEBUG
     #define DBG(fmt, ...) \
@@ -20,7 +20,7 @@ struct Node_t
     Node_t* right;
 };
 
-Node_t* NewNode(int value);
+Node_t* CreateNode(int value);
 Node_t* InsertNode(Node_t* node, int value);
 Node_t* GrafDump(Node_t* node, FILE* file);
 void PrintTree(Node_t* node);

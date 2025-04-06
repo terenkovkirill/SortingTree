@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "BinTree.h"
+#include "BinTree.h" // TODO убрать лишние include
 
 
 int main()
 {   
-    int tree_data[] = {12, 70, 1, 15, 60};
+    int tree_data[] = {70, 12, 15, 60, 5, 17};
     Node_t* root = InsertNode(0, 50);
 
     DBG("InsertNode(0, 50)");
@@ -24,11 +24,12 @@ int main()
     GrafDump(root, file);
 
     fprintf(file, "} \n");
+    fclose(file);
 
     PrintTree(root);
 
-    //system("dot BTree.dot -T png -o BTree.png");
-
+    system("dot BTree.dot -T png -o BTree.png");
+    
     DBG("BinTree works");
 
     return 0;

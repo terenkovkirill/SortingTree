@@ -7,25 +7,22 @@ Node_t* InsertNode(Node_t* node, int value)
 {
     if (node == NULL)
     {
-        node = NewNode(value);
-        return node;
+        return CreateNode(value);
     }
 
     if (value < node->value)
     {
         Node_t* left =  InsertNode(node->left, value);
         node->left = left;
-
-        return node;
     }
-
-    else
+    
+    if (value > node->value)
     {
         Node_t* right =  InsertNode(node->right, value);
         node->right = right;
-
-        return node;
     }
+
+    return node;
 }
 
 // void Insert(Node_t* cur_node, int node)                             //простая версия, сохраняет результат (50(12(5)(15(17)))(70(60)))
@@ -40,10 +37,10 @@ Node_t* InsertNode(Node_t* node, int value)
 //     }
 
 //     if (node < cur_node->value)
-//         cur_node->left = NewNode(node);
+//         cur_node->left = CreateNode(node);
 
 //     else
-//         cur_node->right = NewNode(node);                            //если node > cur_node->right
+//         cur_node->right = CreateNode(node);                            //если node > cur_node->right
 // }
 
 // void Insert(Node_t* cur_node, int value)                    //продвинутая версия, но нерабочая
@@ -59,10 +56,10 @@ Node_t* InsertNode(Node_t* node, int value)
 //         cur_node = (value < cur_node->value) ? cur_node->left : cur_node->right; 
 //     }
 
-//     cur_node = NewNode(value);
+//     cur_node = CreateNode(value);
 // }
 
-Node_t* NewNode(int value)
+Node_t* CreateNode(int value)
 {
     Node_t* node = (Node_t *)calloc(1, sizeof(Node_t));
 
