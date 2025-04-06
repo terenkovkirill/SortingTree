@@ -15,13 +15,14 @@
 
 struct Node_t 
 {
-    int data;
+    int value;
     Node_t* left;
     Node_t* right;
 };
 
-Node_t* NewNode(int data);
+Node_t* NewNode(int value);
 Node_t* InsertNode(Node_t* node, int value);
-void Print(Node_t* node);
+Node_t* GrafDump(Node_t* node, FILE* file);
+void PrintTree(Node_t* node);
 
 #endif
