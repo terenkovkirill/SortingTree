@@ -25,6 +25,34 @@ Node_t* InsertNode(Node_t* node, int value)
     return node;
 }
 
+
+Node_t* InsertNodeLoop(Node_t* node, int value)
+{
+    if (node == NULL)
+        return CreateNode(value);
+
+    DBG("cur_node = node = %p", node);
+
+    while (node != NULL)
+    {
+        if (node != NULL && value < node->value)
+        {
+            DBG("value = %d < node->value = %d, so cur_node = %p (node->left)", value, node->value, node->left);
+            Node_t* cur_node = node->left;
+            node = cur_node;
+        }
+        
+        if (node != NULL && value > node->value)            //В этой строке Segmentation Fault
+        {
+            DBG("value = %d > node->value = %d, so cur_node = %p (node->right)", value, node->value, node->right);
+            Node_t* cur_node = node->right;
+            node = cur_node;
+        }
+    }
+
+    return CreateNode(value);
+}
+
 // void Insert(Node_t* cur_node, int node)                             //простая версия, сохраняет результат (50(12(5)(15(17)))(70(60)))
 // {                                                                   //почему-то ломается при Insert(root, 100)
 //     while ((cur_node->left != NULL) || (cur_node->right != NULL))
@@ -43,22 +71,6 @@ Node_t* InsertNode(Node_t* node, int value)
 //         cur_node->right = CreateNode(node);                            //если node > cur_node->right
 // }
 
-// void Insert(Node_t* cur_node, int value)                    //продвинутая версия, но нерабочая
-// {                                                           //почему-то не сохраняет результат  (50(12(5)(15))(70(60)))
-//     while (cur_node != NULL)
-//     {
-//         // if (node < cur_node->value)
-//         //     cur_node = cur_node->left;
-
-//         // else
-//         //     cur_node = cur_node->right;
-
-//         cur_node = (value < cur_node->value) ? cur_node->left : cur_node->right; 
-//     }
-
-//     cur_node = CreateNode(value);
-// }
-
 Node_t* CreateNode(int value)
 {
     Node_t* node = (Node_t *)calloc(1, sizeof(Node_t));
@@ -71,7 +83,24 @@ Node_t* CreateNode(int value)
 }
 
 
-Node_t* GrafDump(Node_t* node, FILE* file)
+TreeError GrafDump(Node_t* node)
+{
+    if (node == NULL)
+        return NULL_PTR;
+
+    FILE* file = fopen("BTree.dot", "w");
+    fprintf(file, "digraph\n{\n");
+
+    RecursiveGrafDump(node, file);
+
+    fprintf(file, "} \n");
+    fclose(file);
+
+    return OK;
+}
+
+
+Node_t* RecursiveGrafDump(Node_t* node, FILE* file)
 {
     assert(node != NULL);
 
@@ -79,13 +108,13 @@ Node_t* GrafDump(Node_t* node, FILE* file)
 
     if (node->left != NULL)
     {
-        Node_t* left =  GrafDump(node->left, file);
+        Node_t* left =  RecursiveGrafDump(node->left, file);
         fprintf(file, "     node%p -> node%p \n\n", node, left);
     }
 
     if (node->right != NULL)
     {
-        Node_t* right =  GrafDump(node->right, file);
+        Node_t* right =  RecursiveGrafDump(node->right, file);
         fprintf(file, "     node%p -> node%p \n\n", node, right);
     }
 

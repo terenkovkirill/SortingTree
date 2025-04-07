@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-// #define DEBUG
+#define DEBUG
 
 #ifdef DEBUG
     #define DBG(fmt, ...) \
@@ -11,7 +11,12 @@
 #else
     #define DBG(fmt, ...)
 #endif
-//         fprintf(stderr, "[DEBUG] %s:%s.%d() " fmt "\n", __FILE__, __func__, __LINE__, ##__VA_ARGS__)
+
+enum TreeError
+{
+    NULL_PTR = 0,
+    OK = 1
+};
 
 struct Node_t 
 {
@@ -22,7 +27,9 @@ struct Node_t
 
 Node_t* CreateNode(int value);
 Node_t* InsertNode(Node_t* node, int value);
-Node_t* GrafDump(Node_t* node, FILE* file);
+Node_t* InsertNodeLoop(Node_t* node, int value);
+TreeError GrafDump(Node_t* node);
+Node_t* RecursiveGrafDump(Node_t* node, FILE* file);
 void PrintTree(Node_t* node);
 
 #endif
