@@ -33,24 +33,34 @@ Node_t* InsertNodeLoop(Node_t* node, int value)
 
     DBG("cur_node = node = %p", node);
 
+    Node_t* parent = node;
+
     while (node != NULL)
-    {
+    { 
         if (node != NULL && value < node->value)
         {
-            DBG("value = %d < node->value = %d, so cur_node = %p (node->left)", value, node->value, node->left);
-            Node_t* cur_node = node->left;
-            node = cur_node;
+            DBG("value = %d < node->value = %d, parent = %p, so node = %p (node->left)", value, node->value, parent, node->left);
+            node = node->left;
+
+            if (node == NULL)
+                parent->left = CreateNode(value);
+            else
+                parent = node;
         }
         
-        if (node != NULL && value > node->value)            //В этой строке Segmentation Fault
+        if (node != NULL && value > node->value)
         {
-            DBG("value = %d > node->value = %d, so cur_node = %p (node->right)", value, node->value, node->right);
-            Node_t* cur_node = node->right;
-            node = cur_node;
+            DBG("value = %d > node->value = %d, parent  = %p, so node = %p (node->right)", value, node->value, parent, node->right);
+            node = node->right;
+
+            if (node == NULL)
+                parent->right = CreateNode(value);
+            else
+                parent = node;
         }
     }
 
-    return CreateNode(value);
+    return node;                //TODO: это хрень - поправить
 }
 
 // void Insert(Node_t* cur_node, int node)                             //простая версия, сохраняет результат (50(12(5)(15(17)))(70(60)))
