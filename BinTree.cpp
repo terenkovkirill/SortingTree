@@ -3,6 +3,19 @@
 #include <assert.h>
 #include "BinTree.h"
 
+
+Node_t* CreateNode(int value)
+{
+    Node_t* node = (Node_t *)calloc(1, sizeof(Node_t));
+
+    node->value = value;
+    node->left = NULL;
+    node->right =NULL;
+
+    return node;
+}
+
+
 Node_t* InsertNode(Node_t* node, int value)
 {
     if (node == NULL)
@@ -29,67 +42,39 @@ Node_t* InsertNode(Node_t* node, int value)
 Node_t* InsertNodeLoop(Node_t* node, int value)
 {
     if (node == NULL)
-        return CreateNode(value);
-
-    DBG("cur_node = node = %p", node);
-
-    Node_t* parent = node;
+    {
+        node = CreateNode(value);
+        return node;
+    }
 
     while (node != NULL)
     { 
-        if (node != NULL && value < node->value)
+        if (value < node->value)
         {
-            DBG("value = %d < node->value = %d, parent = %p, so node = %p (node->left)", value, node->value, parent, node->left);
-            node = node->left;
+            if (node->left == NULL)
+            {
+                node->left = CreateNode(value);
+                return node->left;
+            }
 
-            if (node == NULL)
-                parent->left = CreateNode(value);
             else
-                parent = node;
+                node = node->left;
         }
         
-        if (node != NULL && value > node->value)
+        if (value > node->value)
         {
-            DBG("value = %d > node->value = %d, parent  = %p, so node = %p (node->right)", value, node->value, parent, node->right);
-            node = node->right;
+            if (node->right == NULL)
+            {
+                node->right = CreateNode(value);
+                return node->right;
+            }
 
-            if (node == NULL)
-                parent->right = CreateNode(value);
             else
-                parent = node;
+                node = node->right;
         }
     }
 
-    return node;                //TODO: это хрень - поправить
-}
-
-// void Insert(Node_t* cur_node, int node)                             //простая версия, сохраняет результат (50(12(5)(15(17)))(70(60)))
-// {                                                                   //почему-то ломается при Insert(root, 100)
-//     while ((cur_node->left != NULL) || (cur_node->right != NULL))
-//     {
-//         if (node < cur_node->value)
-//             cur_node->left;
-
-//         else
-//             cur_node = cur_node->right;
-//     }
-
-//     if (node < cur_node->value)
-//         cur_node->left = CreateNode(node);
-
-//     else
-//         cur_node->right = CreateNode(node);                            //если node > cur_node->right
-// }
-
-Node_t* CreateNode(int value)
-{
-    Node_t* node = (Node_t *)calloc(1, sizeof(Node_t));
-
-    node->value = value;
-    node->left = NULL;
-    node->right =NULL;
-
-    return node;
+    return NULL;                                            
 }
 
 
