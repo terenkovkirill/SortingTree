@@ -117,7 +117,7 @@ Node_t* RecursiveGrafDump(Node_t* node, FILE* file)
 }
 
 
-void PrintTree(Node_t* node)        //PREORDER
+void PrintPreorder(Node_t* node)       
 {
     if (!node) return;
 
@@ -125,10 +125,67 @@ void PrintTree(Node_t* node)        //PREORDER
     printf("%d", node->value);
 
     if (node->left)
-        PrintTree(node->left);
+        PrintPreorder(node->left);
     
     if (node->right)
-        PrintTree(node->right);
+        PrintPreorder(node->right);
 
     printf(")");
+}
+
+
+void PrintPostorder(Node_t* node)
+{
+    if (!node)
+        return;
+    
+    printf("(");
+
+    if (node->left)
+        PrintPostorder(node->left);
+    
+    if (node->right)
+        PrintPostorder(node->right);
+    
+    printf("%d)", node->value);
+}
+
+
+void PrintInorder(Node_t* node)
+{
+    if (!node)
+        return;
+    
+    printf("(");
+
+    if (node->left)
+        PrintInorder(node->left);
+    
+    printf("%d", node->value);
+
+    if (node->right)
+        PrintInorder(node->right);
+    
+    printf(")");
+}
+
+
+TreeError FindNode(Node_t* node, int value)
+{
+    if (node == NULL)
+        return VALUE_NOT_FOUND;                                //This may means, that root = NULL 
+
+    if (node->value == value)
+    {
+        printf("[INFO] Node found %p with value = %d", node, value);
+        return OK;
+    }
+    
+    if (node->value < value)
+        FindNode(node->left, value);
+
+    if (node->value > value)
+        FindNode(node->right, value);
+
+    return OK;
 }
