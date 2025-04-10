@@ -36,8 +36,9 @@ int main()
     PrintInorder(root);
     printf("\n");
 
-    TreeError return_value = FindNode(root, 15);
-    DBG("return_value for FindNode = %d", return_value);
+    FindNode(root, 15);  
+
+    FreeTree(root);
 
     system("dot BTree.dot -T png -o BTree.png");
     
@@ -52,6 +53,6 @@ int main()
 // 2. InsertNode                                        +
 // 2.1 Поработать над внешним видом graf_dump           +
 // 2.5 InsertNode (loop)                                +
-// 3. FreeNode
-// 4. NodeFind  - ничего не выводит (т.к. возвращает ОК = 1) - отладить
+// 3. FreeNode                                          
+// 4. NodeFind                                          +
 // 5. TreeTraversal (Print)                             +

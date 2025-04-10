@@ -177,15 +177,47 @@ TreeError FindNode(Node_t* node, int value)
 
     if (node->value == value)
     {
-        printf("[INFO] Node found %p with value = %d", node, value);
+        printf("[INFO] Node found %p with value = %d \n", node, value);
         return OK;
     }
     
-    if (node->value < value)
+    if (value < node->value)
         FindNode(node->left, value);
 
-    if (node->value > value)
+    if (value > node->value)
         FindNode(node->right, value);
 
+    return OK;
+}
+
+
+TreeError FreeNode(Node_t* node)                            //Как должна выглядеть эта функция?
+{
+    if (node == NULL)
+        return OK;
+    
+    node->left = NULL;                                      
+    node->right = NULL;
+    node->value = 0;
+    
+    free(node);
+
+    return OK;
+}
+
+
+TreeError FreeTree(Node_t* node)
+{
+    if (node == NULL)
+        return OK;
+    
+    if (node->left)
+        FreeTree(node->left);
+
+    if (node->right)
+        FreeTree(node->right);
+    
+    FreeNode(node);
+    
     return OK;
 }

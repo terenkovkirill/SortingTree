@@ -1,22 +1,22 @@
 digraph
 {
-     node0x56040b6b72a0[shape="Mrecord", label="{node0x56040b6b72a0 | value = 50 | {left = 0x56040b6b72e0 | right = 0x56040b6b72c0}}"] 
-     node0x56040b6b72e0[shape="Mrecord", label="{node0x56040b6b72e0 | value = 12 | {left = 0x56040b6b7340 | right = 0x56040b6b7300}}"] 
-     node0x56040b6b7340[shape="Mrecord", label="{node0x56040b6b7340 | value = 5 | {left = (nil) | right = (nil)}}"] 
-     node0x56040b6b72e0 -> node0x56040b6b7340 
+     node0x503000000040[shape="Mrecord", label="{node0x503000000040 | value = 50 | {left = 0x5030000000a0 | right = 0x503000000070}}"] 
+     node0x5030000000a0[shape="Mrecord", label="{node0x5030000000a0 | value = 12 | {left = 0x503000000130 | right = 0x5030000000d0}}"] 
+     node0x503000000130[shape="Mrecord", label="{node0x503000000130 | value = 5 | {left = (nil) | right = (nil)}}"] 
+     node0x5030000000a0 -> node0x503000000130 
 
-     node0x56040b6b7300[shape="Mrecord", label="{node0x56040b6b7300 | value = 15 | {left = (nil) | right = 0x56040b6b7360}}"] 
-     node0x56040b6b7360[shape="Mrecord", label="{node0x56040b6b7360 | value = 17 | {left = (nil) | right = (nil)}}"] 
-     node0x56040b6b7300 -> node0x56040b6b7360 
+     node0x5030000000d0[shape="Mrecord", label="{node0x5030000000d0 | value = 15 | {left = (nil) | right = 0x503000000160}}"] 
+     node0x503000000160[shape="Mrecord", label="{node0x503000000160 | value = 17 | {left = (nil) | right = (nil)}}"] 
+     node0x5030000000d0 -> node0x503000000160 
 
-     node0x56040b6b72e0 -> node0x56040b6b7300 
+     node0x5030000000a0 -> node0x5030000000d0 
 
-     node0x56040b6b72a0 -> node0x56040b6b72e0 
+     node0x503000000040 -> node0x5030000000a0 
 
-     node0x56040b6b72c0[shape="Mrecord", label="{node0x56040b6b72c0 | value = 70 | {left = 0x56040b6b7320 | right = (nil)}}"] 
-     node0x56040b6b7320[shape="Mrecord", label="{node0x56040b6b7320 | value = 60 | {left = (nil) | right = (nil)}}"] 
-     node0x56040b6b72c0 -> node0x56040b6b7320 
+     node0x503000000070[shape="Mrecord", label="{node0x503000000070 | value = 70 | {left = 0x503000000100 | right = (nil)}}"] 
+     node0x503000000100[shape="Mrecord", label="{node0x503000000100 | value = 60 | {left = (nil) | right = (nil)}}"] 
+     node0x503000000070 -> node0x503000000100 
 
-     node0x56040b6b72a0 -> node0x56040b6b72c0 
+     node0x503000000040 -> node0x503000000070 
 
 } 
