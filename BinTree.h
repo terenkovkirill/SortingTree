@@ -31,7 +31,7 @@ Node_t* InsertNode(Node_t* node, int value);
 Node_t* InsertNodeLoop(Node_t* node, int value);
 TreeError FindNode(Node_t* node, int value);
 TreeError FreeTree(Node_t** node);
-TreeError FreeNode(Node_t* node);
+TreeError FreeNode(Node_t** node);
 TreeError GrafDump(Node_t* node);
 Node_t* RecursiveGrafDump(Node_t* node, FILE* file);
 TreeError PrintPreorder(Node_t* node);
