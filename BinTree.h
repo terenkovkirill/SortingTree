@@ -30,12 +30,12 @@ Node_t* CreateNode(int value);
 Node_t* InsertNode(Node_t* node, int value);
 Node_t* InsertNodeLoop(Node_t* node, int value);
 TreeError FindNode(Node_t* node, int value);
-TreeError FreeTree(Node_t* node);
+TreeError FreeTree(Node_t** node);
 TreeError FreeNode(Node_t* node);
 TreeError GrafDump(Node_t* node);
 Node_t* RecursiveGrafDump(Node_t* node, FILE* file);
-void PrintPreorder(Node_t* node);
-void PrintPostorder(Node_t* node);
-void PrintInorder(Node_t* node);
+TreeError PrintPreorder(Node_t* node);
+TreeError PrintPostorder(Node_t* node);
+TreeError PrintInorder(Node_t* node);
 
 #endif

@@ -8,7 +8,7 @@ Node_t* CreateNode(int value)
 {
     Node_t* node = (Node_t *)calloc(1, sizeof(Node_t));
 
-    node->value = value;
+    node->value = value; 
     node->left = NULL;
     node->right =NULL;
 
@@ -117,9 +117,9 @@ Node_t* RecursiveGrafDump(Node_t* node, FILE* file)
 }
 
 
-void PrintPreorder(Node_t* node)       
+TreeError PrintPreorder(Node_t* node)       
 {
-    if (!node) return;
+    if (!node) return OK;
 
     printf("(");
     printf("%d", node->value);
@@ -131,13 +131,15 @@ void PrintPreorder(Node_t* node)
         PrintPreorder(node->right);
 
     printf(")");
+
+    return OK;
 }
 
 
-void PrintPostorder(Node_t* node)
+TreeError PrintPostorder(Node_t* node)
 {
     if (!node)
-        return;
+        return OK;
     
     printf("(");
 
@@ -148,13 +150,15 @@ void PrintPostorder(Node_t* node)
         PrintPostorder(node->right);
     
     printf("%d)", node->value);
+
+    return OK;
 }
 
 
-void PrintInorder(Node_t* node)
+TreeError PrintInorder(Node_t* node)
 {
     if (!node)
-        return;
+        return OK;
     
     printf("(");
 
@@ -167,6 +171,8 @@ void PrintInorder(Node_t* node)
         PrintInorder(node->right);
     
     printf(")");
+
+    return OK;
 }
 
 
@@ -191,31 +197,32 @@ TreeError FindNode(Node_t* node, int value)
 }
 
 
-TreeError FreeNode(Node_t* node)                            //Как должна выглядеть эта функция?
+TreeError FreeNode(Node_t** node)                            
 {
-    if (node == NULL)
-        return OK;
+    if (node == NULL || *node == NULL)
+        return OK;                                     
     
-    node->left = NULL;                                      
-    node->right = NULL;
-    node->value = 0;
+    // (*node)->left  = NULL;                                      
+    // (*node)->right = NULL;
+    // (*node)->value = 0;
     
-    free(node);
+    free(*node);
+    *node = NULL;                                       //обнуляем указатель на узел
 
     return OK;
 }
 
 
-TreeError FreeTree(Node_t* node)
+TreeError FreeTree(Node_t** node)                       //работаем с Node_t** для обнуления указателей на узлы
 {
-    if (node == NULL)
-        return OK;
+    if (node == NULL || *node == NULL)
+        return OK;                                      //значит, дерево очищено
     
-    if (node->left)
-        FreeTree(node->left);
+    if ((*node)->left)
+        FreeTree(&((*node)->left));
 
-    if (node->right)
-        FreeTree(node->right);
+    if ((*node)->right)
+        FreeTree(&((*node)->right));
     
     FreeNode(node);
     

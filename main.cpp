@@ -3,6 +3,9 @@
 #include "BinTree.h" // TODO убрать лишние include
 
 
+#include <iostream>
+#include <cstdlib>
+
 int main()
 {   
     int tree_data[] = {70, 12, 15, 60, 5, 17};
@@ -12,6 +15,7 @@ int main()
     int len_array = sizeof(tree_data) / sizeof(int);
 
     Node_t* root = InsertNode(0, 50);
+    
     for (int i = 0; i < len_array; i++)
     {
         InsertNode(root, tree_data[i]);
@@ -36,23 +40,19 @@ int main()
     PrintInorder(root);
     printf("\n");
 
-    FindNode(root, 15);  
+    FindNode(root, 17);  
 
-    FreeTree(root);
+    FreeTree(&root);
 
     system("dot BTree.dot -T png -o BTree.png");
     
     DBG("BinTree works");
 
+    //Для подключения задержки в конце:
+    // #ifdef __linux__
+    //     std::cout << "Press Enter to exit...";
+    //     std::cin.get();  // Ждём нажатия Enter (для Linux/WSL)
+    // #endif
+
     return 0;
 }
-
-
-// TODO:
-// 1. Graf Dump                                         +
-// 2. InsertNode                                        +
-// 2.1 Поработать над внешним видом graf_dump           +
-// 2.5 InsertNode (loop)                                +
-// 3. FreeNode                                          
-// 4. NodeFind                                          +
-// 5. TreeTraversal (Print)                             +
