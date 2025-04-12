@@ -5,7 +5,7 @@ DOT = dot
 DOTFLAGS = -Tpng
 
 .PHONY: all
-all: clean_before_built main.exe BTree.png
+all: clean_before_built main.exe
 
 clean_before_built:
 	@$(MAKE) clean
@@ -19,13 +19,11 @@ main.o: main.cpp BinTree.h Makefile
 BinTree.o: BinTree.cpp BinTree.h Makefile
 	$(CC) $(CFLAGS) -c BinTree.cpp
 
-BTree.png: BTree.dot
-	$(DOT) $(DOTFLAGS) BTree.dot -o BTree.png
 
 .PHONY: run clean 
 
 run:
-	./main.exe
+	./main.exe && $(DOT) $(DOTFLAGS) BTree.dot -o BTree.png
 
 clean:
 	rm -f *.o main.exe BTree.png BTree.dot
